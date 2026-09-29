@@ -3,7 +3,7 @@ name: GLaDOS Auto Checkin
 on:
   workflow_dispatch:  # 手动触发
   schedule:
-    - cron: '0 3 * * *'   # 每日 UTC 3 点签到（北京时间 11 点）
+    - cron: '0 3 * * *'   # 每日 UTC 4 点签到（北京时间 12 点）
     - cron: '0 0 1 * *'   # 每月 1 号保活空提交
 
 jobs:
@@ -33,7 +33,7 @@ jobs:
       - name: Run checkin
         run: python checkin.py
         env:
-          COOKIES: ${{ secrets.COOKIES }}
+          COOKIES: ${{ secrets.COOKIES || vars.COOKIES }}
           SENDKEY: ${{ secrets.SENDKEY }}
           SERVERCHAN_KEY: ${{ secrets.SERVERCHAN_KEY }}
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
